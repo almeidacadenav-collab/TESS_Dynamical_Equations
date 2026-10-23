@@ -1,0 +1,475 @@
+PAPER_ID:
+S01
+
+REFERENCIA:
+Brunton, S. L., Proctor, J. L., & Kutz, J. N. (2016).
+Discovering governing equations from data by sparse identification
+of nonlinear dynamical systems.
+Proceedings of the National Academy of Sciences, 113(15), 3932-3937.
+
+DOI:
+10.1073/pnas.1517384113
+
+NIVEL DE EVIDENCIA:
+A
+
+1. PREGUNTA DEL ARTÍCULO:
+
+¿Es posible identificar automáticamente las ecuaciones diferenciales
+que gobiernan un sistema dinámico a partir de mediciones temporales,
+suponiendo que la dinámica puede representarse mediante pocos términos
+activos dentro de una biblioteca amplia de funciones candidatas?
+
+2. PROBLEMA MATEMÁTICO:
+
+El artículo considera un sistema dinámico continuo de la forma:
+
+dx/dt = f(x(t)),
+
+donde x(t) pertenece a R^n y representa el estado del sistema,
+mientras que f describe la evolución temporal desconocida.
+
+A partir de mediciones del estado X y de las derivadas dX/dt,
+el objetivo es encontrar una matriz dispersa de coeficientes Xi tal que:
+
+dX/dt = Theta(X) Xi.
+
+Theta(X) contiene funciones candidatas evaluadas sobre los datos.
+Xi indica qué términos están activos y cuál es su coeficiente.
+
+El problema consiste en encontrar una representación que combine:
+
+1. bajo error de ajuste;
+2. pocos términos activos;
+3. estabilidad frente al ruido;
+4. capacidad de reproducir la dinámica del sistema.
+
+3. DATOS O SISTEMAS UTILIZADOS:
+
+El artículo demuestra SINDy mediante varios sistemas dinámicos conocidos:
+
+1. Osciladores lineales y no lineales.
+2. Sistema caótico de Lorenz.
+3. Flujo alrededor de un cilindro y desprendimiento de vórtices.
+4. Mapa logístico parametrizado con ruido.
+5. Forma normal de Hopf.
+6. Ejemplos de sistemas parametrizados, dependientes del tiempo
+   o sometidos a forzamiento.
+
+En el caso del flujo alrededor de un cilindro se utilizan datos
+de simulación numérica de las ecuaciones de Navier-Stokes y una
+reducción de dimensionalidad mediante Proper Orthogonal Decomposition.
+
+El artículo no utiliza datos astronómicos ni curvas de luz observacionales.
+
+4. REPRESENTACIÓN DEL ESTADO:
+
+El estado se representa mediante un vector:
+
+x(t) = [x1(t), x2(t), ..., xn(t)]^T.
+
+Las observaciones realizadas en m instantes se organizan en una matriz X,
+donde cada fila corresponde a un instante temporal y cada columna a una
+variable de estado.
+
+Las derivadas se organizan en una matriz dX/dt con la misma estructura.
+
+El método depende críticamente de que las coordenadas elegidas permitan
+representar la dinámica de manera dispersa.
+
+El artículo también muestra que los retardos temporales pueden utilizarse
+para reconstruir la dinámica cuando solamente se observa una variable
+escalar.
+
+5. BIBLIOTECA DE FUNCIONES CANDIDATAS:
+
+El artículo construye una biblioteca Theta(X) cuyas columnas contienen
+funciones candidatas evaluadas sobre las variables de estado.
+
+La biblioteca puede incluir:
+
+1. término constante;
+2. términos lineales;
+3. términos polinómicos;
+4. productos cruzados entre variables;
+5. funciones trigonométricas;
+6. otras funciones sugeridas por el conocimiento físico.
+
+Ejemplo para un estado bidimensional x = [x, v]:
+
+Theta(X) = [1, x, v, x^2, xv, v^2, x^3, x^2v, xv^2, v^3, ...].
+
+Cada columna representa un término que podría aparecer en el lado derecho
+de una ecuación diferencial.
+
+La biblioteca debe ser suficientemente expresiva para contener la dinámica,
+pero no tan grande que produzca colinealidad, sobreajuste o costes
+computacionales innecesarios.
+
+6. MÉTODO DE REGRESIÓN DISPERSA:
+
+El artículo presenta el problema:
+
+dX/dt = Theta(X) Xi,
+
+y busca una matriz Xi con pocos coeficientes distintos de cero.
+
+La dispersidad significa que, aunque Theta(X) contenga muchas funciones
+candidatas, solamente unas pocas son seleccionadas para formar cada
+ecuación diferencial.
+
+El artículo discute LASSO como una regresión regularizada con norma L1
+que promueve soluciones dispersas.
+
+También presenta Sequential Thresholded Least Squares, STLSQ, como una
+alternativa computacional.
+
+En STLSQ:
+
+1. se realiza inicialmente un ajuste por mínimos cuadrados;
+2. se eliminan los coeficientes menores que un umbral;
+3. se vuelve a ajustar utilizando solamente los términos conservados;
+4. el proceso se repite hasta obtener una estructura estable.
+
+El umbral controla el compromiso entre complejidad y error:
+
+- umbral muy bajo: demasiados términos y posible sobreajuste;
+- umbral muy alto: pérdida de términos dinámicos importantes.
+
+7. MÉTODO DE ESTIMACIÓN DE DERIVADAS:
+
+El artículo considera dos situaciones:
+
+1. Las derivadas del estado están disponibles directamente.
+2. Solamente se dispone de mediciones del estado y las derivadas deben
+   aproximarse numéricamente.
+
+En los ejemplos continuos, las derivadas se calculan a partir de las
+series temporales del estado.
+
+El artículo reconoce que la diferenciación numérica amplifica el ruido.
+Para reducir este problema utiliza regularización por variación total,
+Total Variation Regularized Derivative, en varios experimentos con datos
+ruidosos.
+
+También menciona la posibilidad de filtrar los datos y las derivadas antes
+de resolver la regresión dispersa.
+
+El procedimiento general es:
+
+1. observar o simular el estado X;
+2. estimar dX/dt;
+3. construir Theta(X);
+4. resolver dX/dt = Theta(X) Xi;
+5. integrar el sistema identificado para evaluar su comportamiento.
+
+La estimación de derivadas no es un paso neutral. Los términos seleccionados
+por SINDy pueden cambiar dependiendo del método de diferenciación, nivel de
+suavizado, ruido y resolución temporal.
+
+8. ESTRATEGIA DE VALIDACIÓN:
+
+El artículo valida SINDy principalmente mediante sistemas cuya dinámica
+verdadera es conocida.
+
+La validación incluye:
+
+1. comparar los términos identificados con los términos de la ecuación
+   original;
+2. comparar los coeficientes estimados con los coeficientes verdaderos;
+3. integrar numéricamente las ecuaciones identificadas;
+4. comparar trayectorias, atractores, ciclos límite y bifurcaciones;
+5. añadir ruido a los datos y estudiar si se recupera la estructura;
+6. evaluar sistemas con derivadas no observadas directamente;
+7. analizar ejemplos en los que una selección inadecuada de coordenadas
+   o biblioteca provoca el fracaso de la identificación.
+
+En sistemas caóticos, el artículo señala que reproducir durante mucho tiempo
+una trayectoria individual puede no ser el criterio más apropiado debido a
+la sensibilidad a las condiciones iniciales.
+
+En esos casos también se evalúa la capacidad de reproducir la geometría y
+las propiedades del atractor.
+
+El artículo no presenta una validación de clasificación, una partición
+train-validation-test comparable con machine learning moderno ni una
+evaluación sobre curvas de luz astronómicas.
+
+9. RESULTADOS REPORTADOS POR LOS AUTORES:
+
+Los autores reportan que SINDy identifica modelos dispersos en varios
+sistemas dinámicos canónicos y de alta dimensionalidad reducida.
+
+Entre los resultados documentados se encuentran:
+
+1. Identificación de términos activos en osciladores lineales y no lineales.
+
+2. Recuperación de la estructura del sistema de Lorenz a partir de datos
+   del estado, incluyendo experimentos con ruido y derivadas estimadas.
+
+3. Recuperación de coeficientes del sistema de Lorenz con errores pequeños
+   respecto de los valores conocidos en el experimento presentado.
+
+4. Reconstrucción de la dinámica del atractor de Lorenz mediante coordenadas
+   retardadas construidas a partir de una sola variable observada.
+
+5. Identificación de una representación dinámica reducida del flujo alrededor
+   de un cilindro después de realizar una reducción dimensional mediante POD.
+
+6. Recuperación de formas normales y comportamiento de bifurcación en el
+   mapa logístico parametrizado y en la forma normal de Hopf.
+
+7. Extensión conceptual del método a sistemas dependientes de parámetros,
+   del tiempo y de forzamientos externos.
+
+Los resultados corresponden a los sistemas y configuraciones experimentales
+estudiados por los autores. No demuestran que SINDy pueda recuperar
+directamente ecuaciones físicas desde cualquier serie temporal observacional.
+
+10. LIMITACIONES DECLARADAS POR LOS AUTORES:
+
+Los autores reconocen que SINDy depende críticamente de:
+
+1. la elección de las variables de medición;
+2. la elección de las coordenadas del estado;
+3. la calidad de los datos;
+4. la estimación de las derivadas;
+5. la selección de la biblioteca de funciones;
+6. la existencia de una representación dispersa en la base elegida;
+7. la cobertura suficiente de la dinámica por los datos;
+8. el crecimiento de la biblioteca al aumentar la dimensión del estado.
+
+El método puede fallar si la dinámica no es dispersa en las coordenadas
+o funciones candidatas seleccionadas.
+
+Una transformación no lineal de las coordenadas puede convertir una
+dinámica originalmente dispersa en una representación no dispersa.
+
+El número de términos de una biblioteca polinómica puede crecer rápidamente
+con la dimensión del estado y el grado del polinomio.
+
+En sistemas de alta dimensión puede ser necesario aplicar reducción
+dimensional antes de utilizar SINDy.
+
+Los autores señalan que no existe un único método que resuelva todos los
+problemas de identificación de sistemas no lineales.
+
+También reconocen que elegir las coordenadas y la base apropiadas requiere
+conocimiento físico, extracción de características y criterio experto.
+
+11. EVALUACIÓN CRÍTICA DEL PROYECTO:
+
+El artículo establece una base metodológica sólida para identificar
+sistemas dinámicos dispersos, pero las demostraciones se realizan
+principalmente sobre sistemas conocidos, simulados o expresados en
+coordenadas especialmente favorables.
+
+Evaluación crítica:
+
+1. Supuesto de dispersidad
+
+SINDy presupone que la dinámica puede expresarse mediante pocos términos
+activos en la biblioteca seleccionada. Este supuesto puede cumplirse para
+un sistema físico en sus coordenadas naturales, pero no necesariamente
+para una variable observacional indirecta.
+
+2. Dependencia de las coordenadas
+
+Una ecuación sencilla puede dejar de ser dispersa después de una
+transformación no lineal de las variables. En astronomía, el flujo
+fotométrico observado es una proyección de procesos físicos internos,
+geometría, temperatura, radio, contaminación y respuesta instrumental.
+
+3. Estimación de derivadas
+
+La diferenciación numérica puede amplificar el ruido. Las curvas TESS
+contienen incertidumbre fotométrica, valores faltantes, cadencias
+marcadas por calidad, discontinuidades y posibles tendencias
+instrumentales. Por tanto, el método de derivación puede alterar los
+términos seleccionados.
+
+4. Cobertura del espacio de estados
+
+Una trayectoria limitada puede no explorar suficiente dinámica para
+identificar todos los términos. Un sector TESS observa una ventana
+temporal finita y puede contener pocos ciclos para algunas estrellas.
+
+5. No unicidad
+
+Diferentes bibliotecas, umbrales y representaciones del estado pueden
+producir ecuaciones distintas con errores de entrenamiento semejantes.
+En consecuencia, una única ejecución de SINDy no proporciona evidencia
+suficiente de una estructura dinámica verdadera.
+
+6. Validación
+
+La validación del artículo es convincente para los sistemas analizados,
+porque se conocen sus ecuaciones originales. En estrellas reales no
+conoceremos la ecuación verdadera. Será necesario validar mediante
+predicción temporal, estabilidad estructural, simulaciones sintéticas,
+comparaciones entre sectores y sensibilidad al preprocesamiento.
+
+7. Interpretación física
+
+Los coeficientes identificados no deben interpretarse automáticamente
+como parámetros físicos estelares. Primero habrá que estudiar unidades,
+escalamiento, identificabilidad, estabilidad y compatibilidad con
+conocimiento astrofísico independiente.
+
+Conclusión crítica:
+
+SINDy es apropiado como método de identificación de modelos dinámicos
+efectivos, pero no debe tratarse como un procedimiento automático para
+descubrir leyes físicas fundamentales desde una curva de luz escalar.
+
+12. RELACIÓN CON NUESTRA INVESTIGACIÓN:
+
+El artículo proporciona el fundamento matemático principal para la etapa
+de descubrimiento explícito de ecuaciones del proyecto.
+
+La relación directa se establece mediante:
+
+dX/dt = Theta(X) Xi.
+
+En nuestra investigación:
+
+1. X se construirá a partir de curvas de luz TESS.
+
+2. Se compararán diferentes representaciones del estado:
+
+   a. flujo normalizado;
+   b. flujo y primera derivada;
+   c. coordenadas con retardos temporales;
+   d. variables latentes, solamente si las alternativas anteriores
+      resultan insuficientes.
+
+3. Theta(X) podrá contener:
+
+   a. término constante;
+   b. términos lineales;
+   c. términos polinómicos;
+   d. interacciones entre variables;
+   e. términos trigonométricos justificados;
+   f. posibles términos dependientes del tiempo o de forzamiento.
+
+4. Xi contendrá los coeficientes identificados para cada estrella,
+   sector, segmento o modelo conjunto.
+
+5. Los elementos de Xi se utilizarán inicialmente como descriptores
+   matemáticos, no como parámetros físicos confirmados.
+
+6. Se evaluará la estabilidad de los términos mediante:
+
+   a. remuestreo;
+   b. perturbación con ruido;
+   c. comparación entre segmentos;
+   d. comparación entre sectores;
+   e. variación del preprocesamiento;
+   f. variación del método de derivación;
+   g. variación del umbral de dispersidad.
+
+7. Las ecuaciones identificadas serán integradas numéricamente.
+
+8. La validación incluirá predicción temporal fuera de muestra.
+
+9. Los términos, coeficientes, residuos y errores podrán formar una
+   representación dinámica para clasificación y detección de casos
+   no explicados.
+
+10. La recuperación de ecuaciones conocidas se comprobará primero
+    mediante datos sintéticos.
+
+13. TÉRMINOS MATEMÁTICOS QUE DEBEMOS ESTUDIAR:
+
+1. Sistema dinámico autónomo.
+2. Sistema dinámico no autónomo.
+3. Vector de estado.
+4. Espacio de fases.
+5. Campo vectorial.
+6. Punto de equilibrio.
+7. Estabilidad de un equilibrio.
+8. Ciclo límite.
+9. Atractor.
+10. Bifurcación.
+11. Forma normal de Hopf.
+12. Reconstrucción del espacio de estados.
+13. Coordenadas retardadas.
+14. Teorema de embedding de Takens.
+15. Derivación numérica.
+16. Regularización.
+17. Norma L1.
+18. LASSO.
+19. Mínimos cuadrados.
+20. Sequential Thresholded Least Squares, STLSQ.
+21. Dispersidad.
+22. Identificabilidad estructural.
+23. Identificabilidad práctica.
+24. Colinealidad.
+25. Condicionamiento numérico.
+26. Escalamiento y normalización.
+27. Integración numérica de ecuaciones diferenciales.
+28. Error local y error acumulado de trayectoria.
+29. Validación temporal fuera de muestra.
+30. Bootstrap y estabilidad de selección.
+31. Reducción de dimensionalidad.
+32. Proper Orthogonal Decomposition.
+33. Sistemas forzados.
+34. Sistemas parametrizados.
+35. Formulación integral y formulación débil de SINDy.
+
+14. DUDAS PENDIENTES:
+
+1. ¿El flujo fotométrico normalizado puede funcionar como variable de
+   estado o solamente como variable observada?
+
+2. ¿Es suficiente una representación de segundo orden formada por flujo
+   y derivada, o se requieren más dimensiones?
+
+3. ¿Qué método de derivación ofrece el mejor equilibrio entre reducción
+   de ruido y conservación de la señal astronómica?
+
+4. ¿Cómo deben tratarse los huecos temporales antes de calcular derivadas?
+
+5. ¿Es apropiado interpolar una curva TESS, y bajo qué condiciones?
+
+6. ¿Qué biblioteca candidata resulta defendible para RRab, DSCT y EW?
+
+7. ¿Deben incluirse términos trigonométricos o estos absorberían
+   artificialmente la periodicidad?
+
+8. ¿Cómo representar un posible forzamiento cuando no se observa
+   directamente?
+
+9. ¿Cómo distinguir una ecuación autónoma insuficiente de una mala
+   estimación de derivadas?
+
+10. ¿Cómo seleccionar el umbral de dispersidad sin utilizar los datos
+    de prueba?
+
+11. ¿Cómo medir la estabilidad del soporte de Xi entre segmentos?
+
+12. ¿Qué nivel de variación de coeficientes puede considerarse aceptable?
+
+13. ¿Cómo comparar coeficientes entre estrellas con periodos y amplitudes
+    diferentes?
+
+14. ¿Es necesario adimensionalizar el tiempo y el flujo?
+
+15. ¿Cómo conservar incertidumbres fotométricas dentro del ajuste?
+
+16. ¿Cómo distinguir error del modelo, error instrumental y variabilidad
+    verdaderamente no estacionaria?
+
+17. ¿Qué horizonte predictivo es científicamente razonable para cada clase?
+
+18. ¿Las binarias EW deben modelarse como sistemas dinámicos o utilizarse
+    principalmente como control de una señal periódica geométrica?
+
+19. ¿La estabilidad de términos aporta información adicional después de
+    controlar periodo, amplitud y contenido armónico?
+
+20. ¿Qué resultados mínimos justificarían incorporar Neural ODE?
+
+ESTADO DE REVISIÓN:
+Primera lectura completada. Pendiente revisión del material suplementario,
+extracción a la matriz bibliográfica y segunda lectura metodológica.

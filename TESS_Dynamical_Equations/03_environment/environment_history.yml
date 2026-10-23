@@ -1,0 +1,23 @@
+name: tess-dynamics
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - jupyterlab
+  - ipykernel
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - statsmodels
+  - astropy
+  - astroquery
+  - numba
+  - h5py
+  - pyarrow
+  - joblib
+  - pyyaml
+  - tqdm
+  - git
+prefix: C:\Users\Maor\miniforge3\envs\tess-dynamics

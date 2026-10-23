@@ -1,0 +1,4 @@
+variability_class,original_points,uniform_points,interpolated_points,retained_points,samples_per_cycle,savgol_window,delta_cycles
+RRab,3225,3272,47,3230,408.20632559999996,21,0.0024497415578510484
+DSCT,4635,4634,-1,4620,139.5472968,7,0.007166029173845345
+EW,4588,4590,2,4564,240.22960559999999,13,0.004162684268254058

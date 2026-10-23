@@ -1,0 +1,224 @@
+TÍTULO DEL PROTOCOLO:
+Revisión bibliográfica sobre descubrimiento de ecuaciones dinámicas en estrellas variables mediante TESS, SINDy y Neural ODE
+
+VERSIÓN:
+v0.1
+
+1. OBJETIVO
+
+Identificar y analizar trabajos científicos relacionados con:
+
+a. Clasificación y caracterización de estrellas variables con TESS.
+b. Modelado mediante ecuaciones diferenciales de estrellas variables.
+c. Reconstrucción de espacios de estado en series temporales astronómicas.
+d. Dinámica no lineal, pulsaciones y caos en estrellas variables.
+e. Descubrimiento de ecuaciones mediante SINDy.
+f. Neural ODE y Universal Differential Equations en sistemas físicos.
+g. Identificación de sistemas a partir de observaciones parciales y ruidosas.
+h. Clasificación y detección de anomalías usando representaciones dinámicas.
+
+2. PREGUNTA DE REVISIÓN
+
+¿En qué medida se han utilizado ecuaciones diferenciales inferidas a partir de curvas de luz para caracterizar, clasificar o detectar comportamientos atípicos en estrellas variables observadas por TESS u otras misiones fotométricas?
+
+3. PREGUNTAS SECUNDARIAS
+
+Q1. ¿Qué ecuaciones diferenciales se han utilizado para modelar estrellas pulsantes?
+
+Q2. ¿Se ha utilizado SINDy o regresión simbólica para identificar ecuaciones en curvas de luz astronómicas?
+
+Q3. ¿Qué representaciones de estado se han utilizado para reconstruir dinámica estelar desde una señal fotométrica escalar?
+
+Q4. ¿Cómo se ha evaluado la estabilidad de ecuaciones inferidas bajo ruido, huecos y muestreo irregular?
+
+Q5. ¿Se han utilizado Neural ODE o Universal Differential Equations en astrofísica estelar?
+
+Q6. ¿Se han convertido parámetros o términos dinámicos en características para clasificación o detección de anomalías?
+
+Q7. ¿Qué limitaciones impiden interpretar una ecuación ajustada como una ley física?
+
+4. BASES Y FUENTES PREVISTAS
+
+Fuentes académicas principales:
+- NASA ADS.
+- Scopus, si existe acceso institucional.
+- Web of Science, si existe acceso institucional.
+- Google Scholar como herramienta complementaria.
+- Crossref para verificar DOI.
+- arXiv para localizar preprints, distinguiéndolos de publicaciones revisadas por pares.
+- Páginas oficiales de revistas y editoriales.
+
+Fuentes técnicas oficiales:
+- NASA.
+- MAST.
+- TESS.
+- Lightkurve.
+- Astroquery.
+- PySINDy.
+- PyTorch.
+- SciML.
+
+5. BLOQUES DE BÚSQUEDA
+
+BLOQUE A. TESS Y ESTRELLAS VARIABLES
+
+("TESS" OR "Transiting Exoplanet Survey Satellite")
+AND
+("variable stars" OR "stellar variability")
+AND
+(classification OR characterization OR "light curves")
+
+BLOQUE B. ECUACIONES DIFERENCIALES Y PULSACIONES
+
+("variable stars" OR "pulsating stars" OR "RR Lyrae" OR "Delta Scuti")
+AND
+("differential equations" OR "dynamical system" OR oscillator)
+AND
+(modeling OR identification)
+
+BLOQUE C. RECONSTRUCCIÓN DEL ESTADO
+
+("stellar light curves" OR "variable stars")
+AND
+("state space reconstruction" OR "delay embedding" OR "Takens embedding")
+AND
+(dynamics OR nonlinear OR chaos)
+
+BLOQUE D. SINDy
+
+("SINDy" OR "sparse identification of nonlinear dynamics")
+AND
+(astronomy OR astrophysics OR "light curve" OR observational)
+
+BLOQUE E. NEURAL ODE
+
+("Neural ODE" OR "neural ordinary differential equation")
+AND
+(astronomy OR astrophysics OR stellar OR physical)
+
+BLOQUE F. UDE
+
+("Universal Differential Equation" OR "Universal Differential Equations")
+AND
+(astronomy OR astrophysics OR physics OR observational)
+
+BLOQUE G. REPRESENTACIÓN DINÁMICA
+
+("dynamical representation" OR "equation-based features"
+OR "system identification")
+AND
+(classification OR clustering OR anomaly)
+AND
+("time series" OR "light curves")
+
+6. CRITERIOS DE INCLUSIÓN
+
+Se incluirán trabajos que cumplan al menos uno de los siguientes criterios:
+
+a. Analicen curvas de luz de estrellas variables.
+b. Utilicen datos TESS para clasificación o caracterización estelar.
+c. Propongan métodos de identificación de ecuaciones.
+d. Estudien SINDy con ruido, observación parcial o muestreo irregular.
+e. Utilicen Neural ODE o UDE en sistemas científicos.
+f. Analicen reconstrucción dinámica, embeddings o caos en estrellas.
+g. Comparen modelos mecanísticos con modelos de machine learning.
+h. Presenten métodos relevantes para validar ecuaciones inferidas.
+
+Se priorizarán:
+- artículos revisados por pares;
+- artículos metodológicos originales;
+- revisiones científicas;
+- documentación oficial;
+- trabajos con código o datos reproducibles.
+
+7. CRITERIOS DE EXCLUSIÓN
+
+Se excluirán:
+
+a. Trabajos sin relación con series temporales, dinámica o estrellas variables.
+b. Documentos sin información metodológica suficiente.
+c. Publicaciones duplicadas.
+d. Resúmenes sin acceso a información verificable.
+e. Contenido divulgativo utilizado como evidencia científica principal.
+f. Estudios que mencionen machine learning sin analizar series temporales o dinámica.
+g. Trabajos cuya referencia, DOI o publicación no pueda verificarse.
+
+Los preprints podrán registrarse, pero se identificarán explícitamente como no revisados por pares cuando corresponda.
+
+8. INFORMACIÓN QUE SE EXTRAERÁ
+
+Para cada publicación se registrará:
+
+1. Identificador interno.
+2. Referencia completa.
+3. Autores.
+4. Año.
+5. Revista o repositorio.
+6. DOI.
+7. URL verificable.
+8. Estado de revisión por pares.
+9. Pregunta científica.
+10. Datos utilizados.
+11. Misión o catálogo.
+12. Clases estelares.
+13. Tamaño de la muestra.
+14. Cadencia y duración.
+15. Preprocesamiento.
+16. Representación del estado.
+17. Modelo matemático.
+18. Método de estimación de derivadas.
+19. Método de ajuste o entrenamiento.
+20. Estrategia de validación.
+21. Métricas.
+22. Resultados principales documentados.
+23. Limitaciones reconocidas.
+24. Disponibilidad de código.
+25. Disponibilidad de datos.
+26. Relación con nuestra investigación.
+27. Posible brecha.
+28. Comentarios críticos.
+
+9. EVALUACIÓN CRÍTICA
+
+Cada trabajo será evaluado en:
+
+a. Calidad y procedencia de los datos.
+b. Tamaño y representatividad de la muestra.
+c. Prevención de fuga de información.
+d. Tratamiento del ruido.
+e. Tratamiento del muestreo irregular.
+f. Justificación de la dimensión del estado.
+g. Identificabilidad de los parámetros.
+h. Validación temporal fuera de muestra.
+i. Estabilidad de los términos o ecuaciones.
+j. Separación entre ajuste matemático e interpretación física.
+k. Reproducibilidad.
+l. Disponibilidad de datos y código.
+
+10. REGLAS DE INTEGRIDAD
+
+No se registrará un resultado sin consultar la publicación original o una fuente bibliográfica fiable.
+
+No se asignará un DOI por semejanza de título.
+
+No se asumirá que un preprint fue revisado por pares.
+
+No se atribuirá una limitación al trabajo si no está documentada o claramente derivada del diseño metodológico.
+
+Las críticas propias se identificarán como "evaluación crítica del proyecto".
+
+Las afirmaciones de los autores se identificarán como "resultado reportado por los autores".
+
+La ausencia de un trabajo en una búsqueda inicial no se considerará prueba definitiva de novedad.
+
+11. RESULTADO ESPERADO
+
+La revisión deberá permitir:
+
+a. Determinar si la combinación TESS-SINDy-Neural ODE ya fue estudiada.
+b. Identificar antecedentes sobre ecuaciones diferenciales en estrellas variables.
+c. Seleccionar representaciones de estado defendibles.
+d. Definir baselines.
+e. Identificar riesgos metodológicos.
+f. Formular una brecha verificable.
+g. decidir si el proyecto tiene una contribución metodológica, astrofísica o ambas.

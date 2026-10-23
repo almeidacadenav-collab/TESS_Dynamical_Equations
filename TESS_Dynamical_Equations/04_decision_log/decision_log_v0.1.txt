@@ -1,0 +1,79 @@
+PROYECTO:
+Descubrimiento de ecuaciones dinámicas en estrellas variables mediante TESS, SINDy y Neural ODE
+
+VERSIÓN DEL REGISTRO:
+v0.1
+
+FECHA:
+[Escribir la fecha de creación]
+
+DECISIÓN D001. TÍTULO PROVISIONAL
+Se mantiene el título:
+"Descubrimiento de ecuaciones dinámicas en estrellas variables mediante TESS, SINDy y Neural ODE".
+
+Justificación:
+El núcleo del trabajo será la formulación, identificación, ajuste, integración y evaluación de ecuaciones diferenciales aplicadas a curvas de luz de estrellas variables.
+
+DECISIÓN D002. NATURALEZA DE LAS ECUACIONES
+Las ecuaciones inferidas se tratarán inicialmente como modelos dinámicos efectivos o fenomenológicos.
+
+No se afirmará que representan leyes físicas fundamentales de una estrella sin validación física independiente.
+
+DECISIÓN D003. CLASES DEL PILOTO
+Las clases iniciales serán:
+1. RR Lyrae tipo RRab.
+2. Delta Scuti, DSCT.
+3. Binarias eclipsantes de contacto, EW.
+
+Justificación:
+Las tres clases presentan señales periódicas o cuasiperiódicas, pero corresponden a mecanismos y niveles de complejidad diferentes.
+
+DECISIÓN D004. TAMAÑO DEL PILOTO
+Se seleccionarán inicialmente 30 estrellas por clase.
+
+Total previsto:
+90 estrellas.
+
+Este conjunto será una prueba de factibilidad y no una muestra poblacional definitiva.
+
+DECISIÓN D005. MÉTODOS PRINCIPALES
+Los métodos iniciales serán:
+1. Oscilador armónico.
+2. Oscilador amortiguado.
+3. Oscilador de Duffing.
+4. Oscilador de Van der Pol.
+5. SINDy.
+
+Neural ODE se incorporará después de comprobar la viabilidad de las representaciones de estado y de SINDy.
+
+DECISIÓN D006. SEPARACIÓN ENTRE AJUSTE Y EVIDENCIA FÍSICA
+Se diferenciarán tres niveles:
+1. Reconstrucción de datos de entrenamiento.
+2. Predicción temporal fuera de muestra.
+3. Interpretación física validada.
+
+Un buen ajuste no se considerará automáticamente evidencia física.
+
+DECISIÓN D007. PARTICIÓN EXPERIMENTAL
+Las particiones para clasificación se realizarán por estrella.
+
+Ningún sector ni segmento de una misma estrella podrá aparecer simultáneamente en entrenamiento y prueba.
+
+DECISIÓN D008. PLATAFORMA DE TRABAJO
+Plataforma principal:
+Windows 11, Miniforge, Python 3.11 y JupyterLab.
+
+Uso local:
+Procesamiento astronómico, ecuaciones diferenciales, SINDy, modelos estadísticos y figuras.
+
+Uso de Google Colab:
+Neural ODE y experimentos que requieran GPU.
+
+DECISIÓN D009. RESTRICCIONES INICIALES
+No se descargarán Full-Frame Images de forma masiva.
+No se descargarán Target Pixel Files indiscriminadamente.
+No se entrenarán redes neuronales antes de validar los modelos diferenciales básicos.
+No se afirmará que el estudio es publicable en Q1 antes de obtener resultados suficientes.
+
+DECISIÓN D010. PRÓXIMA FASE
+Realizar una revisión bibliográfica estructurada antes de instalar el entorno, descargar curvas de luz o programar.
